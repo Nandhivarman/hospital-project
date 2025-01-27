@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - ScamhAI</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: url('https://media.licdn.com/dms/image/v2/C4E12AQEjvQnQbN8B1Q/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1649435129082?e=1738800000&v=beta&t=5VUbpV_x2MLkc5wSup_YD983o1fqubJgDC0nFC8r3iw') no-repeat center center fixed;
+            background-size: cover;
+            opacity: 0.95;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 2.5em;
+            color: #333;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            padding: 10px 20px;
+            margin: 10px 0;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+
+        #forgot-password {
+            margin-top: 10px;
+            color: #007BFF;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Logo and Home Link -->
+        <a href="index.html">
+            <img src="https://previews.dropbox.com/p/thumb/ACd0Unj5EfPVWM_-TyOBcD61GtW47-gK1r226R0Tgmhsgb5USsW-JWh20HGO2Kc1Ep14pQ-3-gZmQvuDPTwzafrCVdVEaVg5nheJKA4D8RkYvkpKRyTn-vZ6PsAyoZt82E06_RntC9Zfiydx8AcxHP9_i8oTphi-lG26Ji55LpCiJaOYJwH4rtMDP4L3etJG6-VGDzzP3owibJzuhcOzm9akt92KGtivS1sioilukiCA4BAX17lzr_tJ7_2H0RqJ1y4SXQZxMgO-exZR9K3JmHBAEvtZ24pYziNIP0BRxE6-0E1Vg3lEKhd00U8_F2JwMhYLXdBkMj06l2MKufWpyGNi/p.png?is_prewarmed=true" alt="Logo" class="logo">
+        </a>
+
+        <h1>Login to ScamhAI</h1>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required><br><br>
+            <input type="password" id="password" placeholder="Password" required><br><br>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="message" id="message"></div>
+
+        <!-- Forgot Password Link -->
+        <a href="forgot-password.html" id="forgot-password">Forgot Password?</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Retrieve users data from localStorage
+            var users = JSON.parse(localStorage.getItem('users')) || [];
+
+            // Find the user with matching username and password
+            var user = users.find(u => u.username === username && u.password === password);
+
+            if (user) {
+                // Show success message
+                document.getElementById('message').textContent = "Login successful!";
+                document.getElementById('message').classList.remove('error');
+                
+                // Redirect to upload page
+                window.location.href = 'upload.html';  // Redirect to the upload page after successful login
+            } else {
+                // Show error message if username/password is invalid
+                document.getElementById('message').textContent = "Invalid username or password.";
+                document.getElementById('message').classList.add('error');
+            }
+        });
+    </script>
+</body>
+
+</html>
